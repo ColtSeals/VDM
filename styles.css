@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url("https://raw.githubusercontent.com/coltpfa/COPOM/main/LOGIN/bandeira-login.png"); /* Substitua pelo caminho da sua imagem */
+    background-image: url("bandeira-login.png"); /* Substitua pelo caminho da sua imagem */
     background-size: cover; /* A imagem preencherá todo o espaço, mantendo a proporção */
     background-repeat: no-repeat; /* Impede que a imagem seja repetida */
     background-position: center center; /* Centraliza a imagem na página */
