@@ -15,6 +15,7 @@ body {
     text-align: center;
     max-width: 400px;
     width: 100%;
+    overflow: hidden; /* Adicionado para evitar que a imagem exceda o contêiner */
 }
 
 .header {
@@ -35,7 +36,10 @@ body {
 }
 
 .logo-container img {
-    max-width: 100px;
+    max-width: 100%; /* Ajuste o tamanho máximo da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Remove espaços indesejados abaixo da imagem */
+    margin: 0 auto; /* Centralize a imagem horizontalmente */
 }
 
 h2 {
