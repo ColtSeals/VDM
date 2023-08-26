@@ -117,59 +117,63 @@
 </script>
 
 
+
 <script>
-function formatText() {
-    const inputText = document.getElementById("inputText").value;
-    const lines = inputText.split("\n");
-
-    let outputText = "VERIFICADO VIA BNMP INDIVIDUO CONSTA PROCURADO\n"; // Usando \n para quebra de linha
-
-    let localDataLineIndex = -1;
     let tipificacaoPenalFlag = false;
     let sinteseDecisaoFlag = false;
 
-    lines.forEach((line, index) => {
-        if (line.startsWith("Local e Data:")) {
-            localDataLineIndex = index;
-            const localData = line.replace("Local e Data:", "").trim();
-            const match = localData.match(/(\d{2} de \w+ de \d{4})/);
-            if (match) {
-                const formattedDate = match[1];
-                outputText += `DATA DA EXPEDIÇÃO: ${formattedDate}\n`;
-            }
-        } else if (localDataLineIndex !== -1 && index === localDataLineIndex + 1) {
-            const year = line.trim();
-            outputText += outputText.replace(/\d{4}$/, year);
-        } else if (line.startsWith("Nome:") || line.startsWith("RG:") || line.startsWith("CPF:") ||
-            line.startsWith("N° do Mandado:") || line.startsWith("Data de validade:") ||
-            line.startsWith("Nº do processo:") || line.startsWith("Tipificação Penal:")) {
-            const nome = line.replace("Nome:", "").trim();
-            const match = nome.match(/(.*?)RJI:/);
-            if (match) {
-                const nomeSemRji = match[1];
-                outputText += `Nome: ${nomeSemRji}\n`;
-            } else {
+    function formatText() {
+        const inputText = document.getElementById("inputText").value;
+        const lines = inputText.split("\n");
+
+        let outputText = "VERIFICADO VIA BNMP INDIVIDUO CONSTA PROCURADO\n"; // Usando \n para quebra de linha
+
+        let localDataLineIndex = -1;
+
+        lines.forEach((line, index) => {
+            if (line.startsWith("Local e Data:")) {
+                localDataLineIndex = index;
+                const localData = line.replace("Local e Data:", "").trim();
+                const match = localData.match(/(\d{2} de \w+ de \d{4})/);
+                if (match) {
+                    const formattedDate = match[1];
+                    outputText += `DATA DA EXPEDIÇÃO: ${formattedDate}\n`;
+                }
+            } else if (localDataLineIndex !== -1 && index === localDataLineIndex + 1) {
+                const year = line.trim();
+                outputText = outputText.replace(/\d{4}$/, year);
+            } else if (line.startsWith("Nome:") || line.startsWith("RG:") || line.startsWith("CPF:") ||
+                line.startsWith("N° do Mandado:") || line.startsWith("Data de validade:") ||
+                line.startsWith("Nº do processo:") || line.startsWith("Tipificação Penal:")) {
+                const nome = line.replace("Nome:", "").trim();
+                const match = nome.match(/(.*?)RJI:/);
+                if (match) {
+                    const nomeSemRji = match[1];
+                    outputText += `Nome: ${nomeSemRji}\n`;
+                } else {
+                    outputText += line + "\n";
+                }
+                if (line.startsWith("Tipificação Penal:")) {
+                    tipificacaoPenalFlag = true;
+                }
+            } else if (tipificacaoPenalFlag && line.trim() !== "" && !line.startsWith("Teor do Documento:") && !line.startsWith("Síntese da Decisão:")) {
                 outputText += line + "\n";
+            } else if (line.startsWith("Síntese da Decisão:")) {
+                sinteseDecisaoFlag = true;
+                tipificacaoPenalFlag = false;
+            } else if (sinteseDecisaoFlag && line.trim() === "") {
+                sinteseDecisaoFlag = false; // Stop adding lines after Síntese da Decisão
             }
-            if (line.startsWith("Tipificação Penal:")) {
-                tipificacaoPenalFlag = true;
-            }
-        } else if (tipificacaoPenalFlag && line.trim() !== "" && !line.startsWith("Teor do Documento:") && !line.startsWith("Síntese da Decisão:")) {
-            outputText += line + "\n";
-        } else if (line.startsWith("Síntese da Decisão:")) {
-            sinteseDecisaoFlag = true;
-            tipificacaoPenalFlag = false;
-        } else if (sinteseDecisaoFlag && line.trim() === "") {
-            sinteseDecisaoFlag = false; // Stop adding lines after Síntese da Decisão
-        }
-    });
+        });
 
-    outputText += "COPOM CAPTURA";
+        outputText += "COPOM CAPTURA";
 
-    // Defina o conteúdo diretamente sem substituir \n por <br>
-    document.getElementById("output").textContent = outputText;
-}
-    </script>
+        // Defina o conteúdo diretamente sem substituir \n por <br>
+        document.getElementById("output").textContent = outputText;
+        document.getElementById("inputText").value = ''; // Limpa o campo de entrada
+    }
+</script>
+
 </body>
 </html>
 
