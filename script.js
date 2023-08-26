@@ -1,9 +1,8 @@
 const users = [
-{ username: "143021", password: "110207" },
-{ username: "152846", password: "luanque" },
+    { username: "143021", password: "110207" },
+    { username: "152846", password: "luanque" },
     { username: "usuario", password: "senha" },
-    { username: "101870", password: "170406" },
-
+    { username: "101870", password: "170406" }
 ];
 
 function login() {
@@ -20,3 +19,9 @@ function login() {
         alert("Credenciais inválidas. Tente novamente.");
     }
 }
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        login();
+    }
+});
