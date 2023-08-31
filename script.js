@@ -4,6 +4,7 @@ const users = [
     { username: "usuario", password: "senha" },
     { username: "101870", password: "170406" },
     { username: "teste", password: "teste" },
+    { username: "153026", password: "frederico" },
 
 
 ];
