@@ -1,4 +1,5 @@
-const users = [
+const users = [   
+    { username: "153026", password: "frederico" },
     { username: "143021", password: "110207" },
     { username: "152846", password: "luanque" },
     { username: "usuario", password: "senha" },
