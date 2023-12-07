@@ -1,11 +1,12 @@
 const users = [
-{ username: "143021", password: "110207" },
-{ username: "152846", password: "luanque" },
+    { username: "157364", password: "157364" },
+    { username: "143021", password: "110207" },
+    { username: "152846", password: "luanque" },
     { username: "usuario", password: "senha" },
     { username: "101870", password: "170406" },
-    { username: "teste", password: "teste" },
+     { username: "teste", password: "teste" },
     { username: "153026", password: "frederico" },
-    { username: "157364", password: "157364" },
+
 
 
 ];
